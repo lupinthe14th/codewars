@@ -1,0 +1,44 @@
+---
+# SeeAlso: https://github.com/mvdan/github-actions-golang
+name: CI
+on:
+  pull_request: ~
+  push:
+    branches:
+      # These are the branches that we want CI to run on direct pushes.
+      # All other changes should go through PRs.
+      - master
+    paths:
+      - '**.ex'
+      - '**.exs'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: [20.3, 21.3, 22.2]
+        elixir: [1.8.2, 1.9.4]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
+      - name: Install Dependencies
+        run: mix deps.get
+      - name: Format Checks
+        run: mix format --check-formatted
+      - name: Run Test
+        run: mix coveralls.json
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}  # required
+          file: ./cover/excoveralls.json
+          flags: unittests
+          name: codecov-umbrella
+      - uses: actions/labeler@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
