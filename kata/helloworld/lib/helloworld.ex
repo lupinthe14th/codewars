@@ -3,5 +3,3 @@ defmodule HelloWorld do
     "hello world!"
   end
 end
-
-IO.puts(HelloWorld.greet())
