@@ -27,9 +27,14 @@ jobs:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
       - name: Install Dependencies
-        run: mix deps.get
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
       - name: Format Checks
         run: mix format --check-formatted
+      - name: Check Linter
+        run: mix credo
       - name: Run Test
         run: mix coveralls.json
       - name: Upload coverage to Codecov
