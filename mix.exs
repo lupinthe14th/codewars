@@ -47,7 +47,7 @@ defmodule Codewars.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:excoveralls, "~> 0.12.2", only: [:dev, :test]},
       {:credo, "~> 0.6", only: [:dev, :test]},
-      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false}
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
 end
