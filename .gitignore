@@ -48,3 +48,7 @@ erl_crash.dump
 
 # Ignore package tarball (built via "mix hex.build").
 codewars-*.tar
+
+# Ignore plts
+/plts/*.plt
+/plts/*.plt.hash
