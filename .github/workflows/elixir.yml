@@ -43,7 +43,7 @@ jobs:
         id: cache-build
         with:
           path: _build
-          key: ${{ runner.os }}-build-v3-${{ hashFiles('lib/**/*.ex') }}${{ hashFiles('test/**/*.ex') }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-build-v3-${{ hashFiles(format('{0}{1}', github.workspace, 'lib/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, 'test/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-build-v3-
       - name: Install dependencies
@@ -64,13 +64,13 @@ jobs:
         id: cache-build-dev
         with:
           path: _build
-          key: ${{ runner.os }}-build-dev-v3-${{ hashFiles('lib/**/*.ex') }}${{ hashFiles('test/**/*.ex') }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-build-dev-v3-${{ hashFiles(format('{0}{1}', github.workspace, 'lib/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, 'test/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-build-dev-v3-
       - uses: actions/cache@v1
         with:
           path: plts
-          key: ${{ runner.os }}-plts-v3-${{ hashFiles('lib/**/*.ex') }}${{ hashFiles('test/**/*.ex') }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          key: ${{ runner.os }}-plts-v3-${{ hashFiles(format('{0}{1}', github.workspace, 'lib/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, 'test/**/*.ex')) }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-plts-v3-
       - name: Install dependencies
