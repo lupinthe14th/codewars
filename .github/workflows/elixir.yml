@@ -16,7 +16,7 @@ env:
   MIX_ENV: test
 
 jobs:
-  format:
+  ci:
 
     runs-on: ubuntu-latest
     name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
@@ -32,16 +32,6 @@ jobs:
           elixir-version: ${{matrix.elixir}}
       - name: Format Checks
         run: mix format --check-formatted
-
-  compile:
-    name: Compile
-    runs-on: ubuntu-latest
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [20.3, 21.3, 22.2]
-        elixir: [1.8.2, 1.9.4]
-    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-elixir@v1.2.0
         with:
@@ -67,101 +57,16 @@ jobs:
       - name: Compile
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: mix compile --warnings-as-errors
-
-  test:
-    name: Tests
-
-    needs: compile
-
-    runs-on: ubuntu-latest
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [20.3, 21.3, 22.2]
-        elixir: [1.8.2, 1.9.4]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1.2.0
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-      - uses: actions/cache@v1
-        id: cache-mix
-        with:
-          path: deps
-          key: ${{ runner.os }}-mix-v5-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-mix-v5-
-      - uses: actions/cache@v1
-        id: cache-build
-        with:
-          path: _build
-          key: ${{ runner.os }}-build-v3-${{ hashFiles('lib/**/*.ex') }}${{ hashFiles('test/**/*.ex') }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-build-v3-
-
       - name: Run tests
         run: mix coveralls.json
       - uses: codecov/codecov-action@v1
         with:
           token: ${{secrets.CODECOV_TOKEN}}
-      - uses: actions/labeler@v2
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-  credo:
-    name: Credo
-
-    needs: compile
-
-    runs-on: ubuntu-latest
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [20.3, 21.3, 22.2]
-        elixir: [1.8.2, 1.9.4]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1.2.0
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-      - uses: actions/cache@v1
-        id: cache-mix
-        with:
-          path: deps
-          key: ${{ runner.os }}-mix-v5-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-mix-v5-
-      - uses: actions/cache@v1
-        id: cache-build
-        with:
-          path: _build
-          key: ${{ runner.os }}-build-v3-${{ hashFiles('lib/**/*.ex') }}${{ hashFiles('test/**/*.ex') }}${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-build-v3-
       - name: Run credo
         run: mix credo --strict
 
-  dialyzer:
-    name: Dialyzer
-
-    runs-on: ubuntu-latest
-
-    env:
-      MIX_ENV: dev
-
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [20.3, 21.3, 22.2]
-        elixir: [1.8.2, 1.9.4]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1.2.0
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
+      - env:
+          MIX_ENV: dev
       - uses: actions/cache@v1
         id: cache-build-dev
         with:
@@ -182,3 +87,8 @@ jobs:
         run: mix compile
       - name: Run dialyzer
         run: mix dialyzer
+      - name: Labeler
+      - uses: actions/labeler@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
