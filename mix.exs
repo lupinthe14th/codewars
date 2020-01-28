@@ -11,9 +11,9 @@ defmodule Codewars.MixProject do
       lockfile: Path.expand("mix.lock", __DIR__),
       deps_path: Path.expand("deps", __DIR__),
       build_path: Path.expand("_build", __DIR__),
-	  preferred_cli_env: preferred_cli_env(),
-	    test_coverage: [tool: ExCoveralls],
-	    dialyzer: dialyzer()
+      preferred_cli_env: preferred_cli_env(),
+      test_coverage: [tool: ExCoveralls],
+      dialyzer: dialyzer()
     ]
   end
 
@@ -39,6 +39,7 @@ defmodule Codewars.MixProject do
       plt_file: {:no_warn, "plts/dialyzer.plt"}
     ]
   end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
