@@ -32,11 +32,6 @@ jobs:
           elixir-version: ${{matrix.elixir}}
       - name: Format Checks
         run: mix format --check-formatted
-      - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1.2.0
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
       - uses: actions/cache@v1
         id: cache-mix
         with:
