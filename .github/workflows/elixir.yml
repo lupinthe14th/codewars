@@ -65,8 +65,6 @@ jobs:
       - name: Run credo
         run: mix credo --strict
 
-      - env:
-          MIX_ENV: dev
       - uses: actions/cache@v1
         id: cache-build-dev
         with:
@@ -82,11 +80,17 @@ jobs:
             ${{ runner.os }}-plts-v3-
       - name: Install dependencies
         run: mix deps.get
+        env:
+          MIX_ENV: dev
       - name: Compile
         if: steps.cache-build-dev.outputs.cache-hit != 'true'
         run: mix compile
+        env:
+          MIX_ENV: dev
       - name: Run dialyzer
         run: mix dialyzer
+        env:
+          MIX_ENV: dev
       - name: Labeler
       - uses: actions/labeler@v2
         with:
