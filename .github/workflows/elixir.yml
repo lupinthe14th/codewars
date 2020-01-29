@@ -86,7 +86,3 @@ jobs:
         run: mix dialyzer
         env:
           MIX_ENV: dev
-      - name: Labeler
-        uses: actions/labeler@v2
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
