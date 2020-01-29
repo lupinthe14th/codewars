@@ -1,22 +1,11 @@
 defmodule GetGrade do
   def get_grade(a, b, c) do
-    score = (a + b + c) / 3
-
-    cond do
-      score >= 90 && score <= 100 ->
-        "A"
-
-      score >= 80 && score < 90 ->
-        "B"
-
-      score >= 70 && score < 80 ->
-        "C"
-
-      score >= 60 && score < 70 ->
-        "D"
-
-      score >= 0 && score < 60 ->
-        "F"
-    end
+    score((a + b + c) / 3)
   end
+
+  def score(s) when s >= 90, do: "A"
+  def score(s) when s >= 80, do: "B"
+  def score(s) when s >= 70, do: "C"
+  def score(s) when s >= 60, do: "D"
+  def score(_), do: "F"
 end
