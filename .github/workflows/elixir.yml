@@ -58,7 +58,6 @@ jobs:
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           flags: elixir
-          name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}} / ${{runner.os}}
       - name: Run credo
         run: mix credo --strict
 
