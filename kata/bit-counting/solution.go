@@ -1,4 +1,4 @@
-package main
+package bitcounting
 
 import (
 	"fmt"
@@ -13,5 +13,3 @@ func CountBits(n uint) int {
 	}
 	return ans
 }
-
-func main() {}
