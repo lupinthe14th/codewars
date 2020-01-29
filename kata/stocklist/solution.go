@@ -1,4 +1,4 @@
-package main
+package stocklist
 
 import (
 	"fmt"
@@ -27,5 +27,3 @@ func StockList(listArt []string, listCat []string) string {
 	}
 	return strings.Join(ans, " - ")
 }
-
-func main() {}

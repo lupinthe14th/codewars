@@ -1,4 +1,4 @@
-package main
+package stocklist
 
 import (
 	"fmt"
@@ -15,6 +15,7 @@ type Case struct {
 
 var cases = []Case{
 	{input: input{listArt: []string{"BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"}, listCat: []string{"A", "B", "C", "D"}}, want: "(A : 0) - (B : 1290) - (C : 515) - (D : 600)"},
+	{input: input{listArt: []string{}, listCat: []string{}}, want: ""},
 }
 
 func TestStockList(t *testing.T) {

@@ -1,4 +1,4 @@
-package main
+package weirdstringcase
 
 import "strings"
 
@@ -23,5 +23,3 @@ func weirdCase(str string) string {
 	}
 	return ans
 }
-
-func main() {}
