@@ -34,8 +34,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}  # required
           file: ./coverage.txt
-          flags: unittests
-          name: codecov-umbrella
+          flags: go
       - uses: actions/labeler@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
