@@ -11,7 +11,8 @@ defmodule TestNumGenerater do
   end
 
   defp solution(min, max, step) do
-    Stream.unfold(min, &{&1, &1 + step})
+    min
+    |> Stream.unfold(&{&1, &1 + step})
     |> Enum.take_while(&(&1 <= max))
   end
 
