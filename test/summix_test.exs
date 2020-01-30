@@ -26,9 +26,12 @@ defmodule TestSumMix do
     num = :rand.uniform(100)
     new_total = num + total
 
-    if rem(n, 2) == 0 do
-      num = Integer.to_string(num)
-    end
+    num =
+      if rem(n, 2) == 0 do
+        Integer.to_string(num)
+      else
+        num
+      end
 
     new_list = list ++ [num]
     generate_random_numbers(new_list, new_total, n - 1)
