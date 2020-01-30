@@ -51,7 +51,9 @@ jobs:
         run: mix deps.get
       - name: Compile
         if: steps.cache-build.outputs.cache-hit != 'true'
-        run: mix compile --warnings-as-errors
+        run: |
+          mix clean
+          mix compile --warnings-as-errors
       - name: Run tests
         run: mix coveralls.json
       - uses: codecov/codecov-action@v1
