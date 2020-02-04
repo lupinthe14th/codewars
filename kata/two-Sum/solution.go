@@ -2,18 +2,15 @@ package twoSum
 
 func TwoSum(numbers []int, target int) [2]int {
 	ans := [2]int{}
-	l := len(numbers)
-	m := make(map[int]int, l)
+	m := make(map[int]int, len(numbers))
 
 	for i, v := range numbers {
-		m[v] = i
-	}
-
-	for i, v := range numbers {
-		if j, ok := m[target-v]; ok {
-			ans = [2]int{i, j}
+		need := target - v
+		if j, ok := m[need]; ok {
+			ans = [2]int{j, i}
 			break
 		}
+		m[v] = i
 	}
 	return ans
 }
