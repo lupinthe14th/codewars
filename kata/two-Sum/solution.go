@@ -5,7 +5,8 @@ func TwoSum(numbers []int, target int) [2]int {
 	m := make(map[int]int, len(numbers))
 
 	for i, v := range numbers {
-		if j, ok := m[target-v]; ok {
+		need := target - v
+		if j, ok := m[need]; ok {
 			ans = [2]int{j, i}
 			break
 		}
