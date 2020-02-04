@@ -8,24 +8,15 @@ type PosPeaks struct {
 
 func PickPeaks(array []int) PosPeaks {
 	var posPeaks = PosPeaks{Pos: []int{}, Peaks: []int{}}
-	l := len(array)
-	if l == 0 {
-		return posPeaks
-	}
-	var pos, peak int = 0, array[0]
-	var up bool
-
-	for i := 1; i < l; i++ {
-		if up && pos != 0 && peak > array[i] {
+	var pos int = 0
+	for i := 1; i < len(array); i++ {
+		if pos > 0 && array[i-1] > array[i] {
 			posPeaks.Pos = append(posPeaks.Pos, pos)
-			posPeaks.Peaks = append(posPeaks.Peaks, peak)
-			up = false
-			peak = array[i]
-		} else if peak < array[i] {
-			up = true
+			posPeaks.Peaks = append(posPeaks.Peaks, array[pos])
+			pos = 0
+		} else if array[i-1] < array[i] {
 			pos = i
 		}
-		peak = array[i]
 	}
 	return posPeaks
 }
