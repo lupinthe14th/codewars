@@ -1,10 +1,8 @@
 defmodule Maximizator do
   def super_size(n) do
     n
-    |> Integer.to_string()
-    |> String.split("", trim: true)
+    |> Integer.digits()
     |> Enum.sort(&(&1 >= &2))
-    |> Enum.join()
-    |> String.to_integer()
+    |> Integer.undigits()
   end
 end
