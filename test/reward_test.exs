@@ -3,6 +3,7 @@ defmodule TestReward do
   import Reward, only: [bonus_time: 2]
 
   test "basic cases" do
+    # credo:disable-for-lines:7
     assert bonus_time(10000, true) == "$100000"
     assert bonus_time(25000, true) == "$250000"
     assert bonus_time(10000, false) == "$10000"
