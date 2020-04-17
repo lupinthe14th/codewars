@@ -1,6 +1,6 @@
 defmodule TestStringUtils do
   use ExUnit.Case
-  import StringUtils, only: [upper_case?: 1, alter_case: 1]
+  import StringUtils, only: [upper_case?: 1, alter_case: 1, digit?: 1]
 
   test "basic cases from description" do
     assert upper_case?("") == true
@@ -23,5 +23,14 @@ defmodule TestStringUtils do
     assert alter_case("StringUtils.toAlternatingCase") == "sTRINGuTILS.TOaLTERNATINGcASE"
     # When method is called twice, should return original string
     assert alter_case(alter_case("Hello World")) == "Hello World"
+  end
+
+  test "basic cases digit?(s)" do
+    assert digit?("") == false
+    assert digit?("7") == true
+    assert digit?(" ") == false
+    assert digit?("a") == false
+    assert digit?("a5") == false
+    assert digit?("14") == false
   end
 end
