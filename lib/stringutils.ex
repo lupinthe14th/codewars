@@ -13,4 +13,8 @@ defmodule StringUtils do
   defp _alter(c) when c in ?a..?z, do: c - 32
   defp _alter(c) when c in ?A..?Z, do: c + 32
   defp _alter(c), do: c
+
+  def digit?(s) do
+    String.match?(s, ~r/^\d\z/)
+  end
 end
