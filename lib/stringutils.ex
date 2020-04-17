@@ -20,6 +20,6 @@ defmodule StringUtils do
 
   def string_to_array(s) do
     s
-    |> String.split(" ")
+    |> String.split()
   end
 end
