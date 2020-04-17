@@ -1,6 +1,6 @@
 defmodule TestStringUtils do
   use ExUnit.Case
-  import StringUtils, only: [upper_case?: 1, alter_case: 1, digit?: 1]
+  import StringUtils, only: [upper_case?: 1, alter_case: 1, digit?: 1, string_to_array: 1]
 
   test "basic cases from description" do
     assert upper_case?("") == true
@@ -32,5 +32,29 @@ defmodule TestStringUtils do
     assert digit?("a") == false
     assert digit?("a5") == false
     assert digit?("14") == false
+  end
+
+  defp testing(s, exp) do
+    actual = string_to_array(s)
+
+    assert actual == exp, """
+    Given string: #{s}
+    Expected:     #{inspect(exp, charlists: :as_lists)}
+    Got:          #{inspect(actual, charlists: :as_lists)}
+    """
+  end
+
+  test "basic tests string_to_array" do
+    testing("Robin Singh", ["Robin", "Singh"])
+
+    testing("I love arrays they are my favorite", [
+      "I",
+      "love",
+      "arrays",
+      "they",
+      "are",
+      "my",
+      "favorite"
+    ])
   end
 end
