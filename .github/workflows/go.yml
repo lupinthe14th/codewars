@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    if: ${{ github.base_ref == 'refs/heads/main' }}
+    if: ${{ github.base_ref == 'main' }}
     strategy:
       matrix:
         # go-version: [1.12.x, 1.13.x]
