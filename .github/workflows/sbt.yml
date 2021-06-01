@@ -1,7 +1,6 @@
 ---
 name: CI
 on:
-<<<<<<< HEAD
   pull_request: ~
   push:
     branches:
@@ -12,10 +11,6 @@ on:
       - '**.scala'
       - '**.sbt'
 
-=======
-  pull_request:
-  push:
->>>>>>> 54ba081e50c51355d2ee72b8e49e3181c3815014
 jobs:
   test:
     strategy:
