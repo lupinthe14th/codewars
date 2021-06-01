@@ -1,0 +1,54 @@
+---
+name: CI
+on:
+  pull_request: ~
+  push:
+    paths:
+      - '**.scala'
+      - '**.sbt'
+
+jobs:
+  test:
+    if: ${{ github.base_ref == 'refs/heads/main' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - java: 11
+            jobtype: 1
+          - java: 11
+            jobtype: 2
+          - java: 11
+            jobtype: 3
+          - java: 14
+            jobtype: 1
+          - java: 14
+            jobtype: 2
+          - java: 14
+            jobtype: 3
+    runs-on: ubuntu-latest
+    env:
+      # define Java options for both official sbt and sbt-extras
+      JAVA_OPTS: -Xms2048M -Xmx2048M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+      JVM_OPTS:  -Xms2048M -Xmx2048M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup
+      uses: olafurpg/setup-scala@v12
+      with:
+        java-version: "openjdk@1.${{ matrix.java }}"
+    - name: Coursier cache
+      uses: coursier/cache-action@v6
+    - name: Build and test
+      run: |
+        sbt -v +test
+        rm -rf "$HOME/.ivy2/local" || true
+        find $HOME/Library/Caches/Coursier/v1        -name "ivydata-*.properties" -delete || true
+        find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
+        find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
+        find $HOME/.sbt                              -name "*.lock"               -delete || true
+      shell: bash
+    - uses: actions/labeler@v2
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
