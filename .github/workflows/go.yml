@@ -33,6 +33,3 @@ jobs:
           file: ./coverage.txt
           flags: go
           name: Go ${{matrix.go-version}} / ${{matrix.platform}}
-      - uses: actions/labeler@v2
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
