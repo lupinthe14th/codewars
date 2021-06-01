@@ -3,16 +3,13 @@ name: CI
 on:
   pull_request: ~
   push:
-    branches:
-      # These are the branches that we want CI to run on direct pushes.
-      # All other changes should go through PRs.
-      - master
     paths:
       - '**.scala'
       - '**.sbt'
 
 jobs:
   test:
+    if: ${{ github.base_ref == 'refs/heads/main' }}
     strategy:
       fail-fast: false
       matrix:

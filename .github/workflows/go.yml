@@ -4,15 +4,12 @@ name: CI
 on:
   pull_request: ~
   push:
-    branches:
-      # These are the branches that we want CI to run on direct pushes.
-      # All other changes should go through PRs.
-      - master
     paths:
       - '**.go'
 
 jobs:
   test:
+    if: ${{ github.base_ref == 'refs/heads/main' }}
     strategy:
       matrix:
         # go-version: [1.12.x, 1.13.x]
