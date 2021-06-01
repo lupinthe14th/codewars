@@ -45,20 +45,7 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Build and test
       run: |
-        case ${{ matrix.jobtype }} in
-          1)
-            sbt -v "mimaReportBinaryIssues; scalafmtCheckAll; +test;"
-            ;;
-          2)
-            sbt -v "scripted actions/*"
-            ;;
-          3)
-            sbt -v "dependency-management/*"
-            ;;
-          *)
-            echo unknown jobtype
-            exit 1
-        esac
+        sbt -v +test
         rm -rf "$HOME/.ivy2/local" || true
         find $HOME/Library/Caches/Coursier/v1        -name "ivydata-*.properties" -delete || true
         find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
