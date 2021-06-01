@@ -2,7 +2,7 @@
 # SeeAlso: https://github.com/mvdan/github-actions-golang
 name: CI
 on:
-  pull_request: ~
+  pull_request:
   push:
     paths:
       - '**.go'

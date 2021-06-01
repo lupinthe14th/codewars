@@ -2,7 +2,7 @@
 # SeeAlso: https://github.com/doughsay/afk/blob/master/.github/workflows/ci.yml 
 name: CI
 on:
-  pull_request: ~
+  pull_request:
   push:
     paths:
       - '**.ex'
