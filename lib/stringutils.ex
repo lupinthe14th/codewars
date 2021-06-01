@@ -17,4 +17,9 @@ defmodule StringUtils do
   def digit?(s) do
     String.match?(s, ~r/^\d\z/)
   end
+
+  def string_to_array(s) do
+    s
+    |> String.split()
+  end
 end
