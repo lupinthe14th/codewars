@@ -1,3 +1,3 @@
 object ReversedStrings {
-  def solution(word: String): String = {}
+  def solution(word: String): String = word.reverse
 }
