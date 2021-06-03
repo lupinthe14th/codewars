@@ -11,8 +11,8 @@ on:
       - '**.sbt'
 
 jobs:
-  if: ${{ github.base_ref == 'main' }}
   test:
+    if: ${{ github.base_ref == 'main' }}
     strategy:
       fail-fast: false
       matrix:
