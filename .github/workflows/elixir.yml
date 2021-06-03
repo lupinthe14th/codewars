@@ -1,5 +1,5 @@
 ---
-# SeeAlso: https://github.com/doughsay/afk/blob/master/.github/workflows/ci.yml 
+# SeeAlso: https://github.com/doughsay/afk/blob/master/.github/workflows/ci.yml
 name: CI
 on:
   pull_request:
