@@ -11,8 +11,8 @@ on:
       - '**.sbt'
 
 jobs:
+  if: ${{ github.base_ref == 'main' }}
   test:
-    if: ${{ github.base_ref == 'main' }}
     strategy:
       fail-fast: false
       matrix:
@@ -55,3 +55,9 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}  # required
         flags: scala
         name: Scala  ${{ matrix.os }} / "openjdk@1.${{ matrix.java }}"
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Formatting
+      run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck
