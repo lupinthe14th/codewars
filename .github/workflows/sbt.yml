@@ -17,19 +17,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - java: 11
-            jobtype: 1
-          - java: 11
-            jobtype: 2
-          - java: 11
-            jobtype: 3
-          - java: 14
-            jobtype: 1
-          - java: 14
-            jobtype: 2
-          - java: 14
-            jobtype: 3
-    runs-on: ubuntu-latest
+          - os: ubuntu-latest
+            java: 11
+          - os: ubuntu-latest
+            java: 15
+          - os: ubuntu-latest
+            java: 16
+    runs-on: ${{ matrix.os }}
     env:
       # define Java options for both official sbt and sbt-extras
       JAVA_OPTS: -Xms2048M -Xmx2048M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
@@ -45,10 +39,26 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Build and test
       run: |
-        sbt -v +test
+        sbt coverage -v +test
         rm -rf "$HOME/.ivy2/local" || true
         find $HOME/Library/Caches/Coursier/v1        -name "ivydata-*.properties" -delete || true
         find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
         find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
         find $HOME/.sbt                              -name "*.lock"               -delete || true
       shell: bash
+    - name: Coverage Report
+      run: sbt coverageReport
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci_if_error: true
+        token: ${{ secrets.CODECOV_TOKEN }}  # required
+        flags: scala
+        name: Scala  ${{ matrix.os }} / "openjdk@1.${{ matrix.java }}"
+  lint:
+    if: ${{ github.base_ref == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Formatting
+      run: sbt scalafmtSbtCheck scalafmtCheck Test/scalafmtCheck
