@@ -56,6 +56,7 @@ jobs:
         flags: scala
         name: Scala  ${{ matrix.os }} / "openjdk@1.${{ matrix.java }}"
   lint:
+    if: ${{ github.base_ref == 'main' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
