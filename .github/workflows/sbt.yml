@@ -23,8 +23,6 @@ jobs:
             java: 15
           - os: ubuntu-latest
             java: 16
-          - os: ubuntu-latest
-            java: 17
     runs-on: ${{ matrix.os }}
     env:
       # define Java options for both official sbt and sbt-extras
