@@ -15,14 +15,4 @@ class ShortestSpec extends AnyFlatSpec with Matchers {
         Shortest.findShort(input) should be(expected)
       }
   }
-  val cases = List(
-    (2, 3, 2),
-    (-2, 2, -2)
-  )
-  cases.foreach {
-    case (m, n, expected) =>
-      s"min($m,$n)" should s"return $expected" in {
-        Shortest.min(m, n) should be(expected)
-      }
-  }
 }
