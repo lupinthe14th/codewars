@@ -1,5 +1,8 @@
 object Grasshopper {
   def checkForFactor(base: Int, factor: Int): Boolean = {
-    return true
+    if (base % factor == 0) {
+      return true
+    }
+    return false
   }
 }
