@@ -18,8 +18,8 @@ class RGBToHexConversionSpec extends AnyFunSuite {
     assert(RGBToHexConversion.helper(512) === 255)
   }
   test("toPadLeft") {
-    assert(RGBToHexConversion.RichString("a").padLeft(0,'*') === "a")
-    assert(RGBToHexConversion.RichString("a").padLeft(1,'*') === "a")
-    assert(RGBToHexConversion.RichString("a").padLeft(2,'*') === "*a")
+    assert(RGBToHexConversion.RichString("a").padLeft(0, '*') === "a")
+    assert(RGBToHexConversion.RichString("a").padLeft(1, '*') === "a")
+    assert(RGBToHexConversion.RichString("a").padLeft(2, '*') === "*a")
   }
 }
