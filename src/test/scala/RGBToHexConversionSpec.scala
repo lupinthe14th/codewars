@@ -7,4 +7,19 @@ class RGBToHexConversionSpec extends AnyFunSuite {
     assert(RGBToHexConversion.rgb(255, 255, 255) === "FFFFFF")
     assert(RGBToHexConversion.rgb(-20, 275, 125) === "00FF7D")
   }
+
+  test("helper") {
+    assert(RGBToHexConversion.helper(0) === 0)
+    assert(RGBToHexConversion.helper(-1) === 0)
+    assert(RGBToHexConversion.helper(-255) === 0)
+    assert(RGBToHexConversion.helper(128) === 128)
+    assert(RGBToHexConversion.helper(255) === 255)
+    assert(RGBToHexConversion.helper(256) === 255)
+    assert(RGBToHexConversion.helper(512) === 255)
+  }
+  test("toPadLeft") {
+    assert(RGBToHexConversion.RichString("a").padLeft(0,'*') === "a")
+    assert(RGBToHexConversion.RichString("a").padLeft(1,'*') === "a")
+    assert(RGBToHexConversion.RichString("a").padLeft(2,'*') === "*a")
+  }
 }
