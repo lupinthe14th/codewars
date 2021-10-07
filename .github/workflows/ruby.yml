@@ -13,7 +13,7 @@ jobs:
     if: ${{ github.base_ref == 'main' }}
     strategy:
       matrix:
-        ruby: [2.7.x, 2.6.x, 2.5.x]
+        ruby: [3.0.2, 2.7.4, 2.6.8]
         # platform: [ubuntu-latest, macos-latest, windows-latest]
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
