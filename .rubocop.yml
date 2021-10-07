@@ -1,0 +1,25 @@
+---
+# https://docs.rubocop.org/rubocop/versioning.html#enablingdisabling-pending-cops-in-bulk
+AllCops:
+  NewCops: enable
+
+# https://github.com/rubocop/rubocop-rspec
+require: rubocop-rspec
+
+# https://rubocop.readthedocs.io/en/latest/cops_style/#stylefrozenstringliteralcomment
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# https://docs.rubocop.org/rubocop/1.3/cops_layout.html#layoutlinelength
+LineLength:
+  Max: 150
+
+# https://docs.rubocop.org/rubocop/1.5/cops_naming.html#namingmethodname
+Naming/MethodName:
+  IgnoredPatterns:
+    - '\A\s*multiTable\s*'
+
+# https://github.com/rubocop/rubocop-rspec/issues/20
+RSpec/DescribeClass:
+  Exclude:
+    - spec/*
