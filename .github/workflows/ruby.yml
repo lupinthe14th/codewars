@@ -1,0 +1,27 @@
+---
+name: Ruby CI
+on:
+  pull_request:
+    paths:
+      - '**.rb'
+  push:
+    paths:
+      - '**.rb'
+
+jobs:
+  test:
+    if: ${{ github.base_ref == 'main' }}
+    strategy:
+      matrix:
+        ruby: [3.0.2, 2.7.4, 2.6.8]
+        # platform: [ubuntu-latest, macos-latest, windows-latest]
+        platform: [ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: bundle install
+      - run: bundle exec rspec
