@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:codewars/ruby-test-framework.git
+  remote: https://github.com/codewars/ruby-test-framework.git
   revision: 7092216514714f90a03020a8ae8ccf765610eb37
   specs:
     codewars_test (0.0.2)
