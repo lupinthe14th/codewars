@@ -11,7 +11,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 # https://docs.rubocop.org/rubocop/1.3/cops_layout.html#layoutlinelength
-LineLength:
+Layout/LineLength:
   Max: 150
 
 # https://docs.rubocop.org/rubocop/1.5/cops_naming.html#namingmethodname
