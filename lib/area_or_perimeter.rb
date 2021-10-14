@@ -1,5 +1,5 @@
-def area_or_perimeter(l, w)
-  return l * w if l == w
+def area_or_perimeter(len, wid)
+  return len * wid if len == wid
 
-  2 * (l + w)
+  2 * (len + wid)
 end
