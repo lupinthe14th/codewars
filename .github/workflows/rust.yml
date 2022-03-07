@@ -1,0 +1,25 @@
+---
+name: Rust
+
+on:
+  pull_request:
+    paths:
+      - '**.rs'
+  push:
+    paths:
+      - '**.rs'
+        
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Clippy
+      run: cargo clippy --all-targets
+    - name: Run tests
+      run: cargo test --verbose
