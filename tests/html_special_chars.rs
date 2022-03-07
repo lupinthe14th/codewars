@@ -1,9 +1,9 @@
 #[warn(dead_code)]
 fn html_special_chars(html: &str) -> String {
-    html.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace("\"", "&quot;")
+    html.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('\"', "&quot;")
 }
 
 #[cfg(test)]
