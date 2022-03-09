@@ -10,7 +10,7 @@ fn switch_it_up(n: usize) -> &'static str {
         7 => "Seven",
         8 => "Eight",
         9 => "Nine",
-        _ => "",
+        _ => panic!(),
     }
 }
 
