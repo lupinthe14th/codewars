@@ -1,17 +1,5 @@
-fn find_short(s: &str) -> u32 {
-    let mut min = u32::MAX;
-    for w in s.split_whitespace() {
-        let c = w.len() as u32;
-        min = umin(min, c);
-    }
-    min
-}
-
-fn umin(x: u32, y: u32) -> u32 {
-    if x < y {
-        return x;
-    }
-    y
+fn find_short(s: &str) -> usize {
+    s.split_whitespace().map(str::len).min().unwrap()
 }
 
 #[test]
