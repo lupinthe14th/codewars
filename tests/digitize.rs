@@ -1,14 +1,12 @@
-fn digitize(n: u64) -> Vec<u8> {
+fn digitize(mut n: u64) -> Vec<u8> {
     let mut out: Vec<u8> = Vec::new();
-    let mut num = n;
-    if n == 0 {
-        out.push(0);
-        return out;
-    }
-    while num > 0 {
-        let m = num % 10;
-        out.push(m.try_into().unwrap());
-        num /= 10;
+    loop {
+        out.push((n % 10) as u8);
+        n /= 10;
+
+        if n == 0 {
+            break;
+        }
     }
     out
 }
