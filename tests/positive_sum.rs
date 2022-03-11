@@ -1,11 +1,5 @@
 fn positive_sum(slice: &[i32]) -> i32 {
-    let mut out: i32 = 0;
-    for n in slice {
-        if n > &0 {
-            out += n
-        }
-    }
-    out
+    slice.iter().filter(|x| x.is_positive()).sum()
 }
 
 #[cfg(test)]
