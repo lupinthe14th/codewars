@@ -1,7 +1,7 @@
 fn multi_table(n: u64) -> String {
     let mut out: String = "".to_string();
     for i in 1..11 {
-        out.push_str(&format!("{:?} * {} = {}", i, n, i * n).to_string());
+        out.push_str(&format!("{} * {} = {}", i, n, i * n));
         if i != 10 {
             out.push('\n');
         }
