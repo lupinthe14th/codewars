@@ -1,15 +1,5 @@
 pub fn remove_char(s: &str) -> String {
-    let l = s.chars().count();
-    let mut c = s.chars();
-    let mut out = String::from("");
-    for i in 0..l {
-        if i == 0 || i == l - 1 {
-            c.next();
-        } else {
-            out.push(c.next().unwrap());
-        };
-    }
-    out
+    s[1..s.len() - 1].to_string()
 }
 
 #[cfg(test)]
